@@ -1682,7 +1682,7 @@ function renderTablesPage() {
     });
 }
 
-// Mark table as occupied
+// 🧍‍♂️ Occupy table
 async function occupyTable(id) {
   const customer = prompt("Enter customer name:");
   if (!customer) return showToast("Cancelled.");
@@ -1690,48 +1690,47 @@ async function occupyTable(id) {
   if (!food) return showToast("Cancelled.");
 
   try {
-    const res = await fetch(`http://localhost:5000/api/tables/${id}`, {
+    const res = await fetch(`https://hotel-backend-ncgp.onrender.com/api/tables/${id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         status: "occupied",
         customer,
-        food,
+        food
       }),
     });
 
     if (!res.ok) throw new Error("Failed to update");
-    await res.json();
-    showToast(`Table ${id} occupied.`);
-    renderTablesPage();
+    showToast(`Table occupied by ${customer}`);
+    setTimeout(renderTablesPage, 300);
   } catch (err) {
     console.error("❌ Error:", err);
-    showToast("Error updating table.");
+    showToast("Error updating table");
   }
 }
 
-// Mark table as empty
+// 🪑 Empty table
 async function emptyTable(id) {
   try {
-    const res = await fetch(`http://localhost:5000/api/tables/${id}`, {
+    const res = await fetch(`https://hotel-backend-ncgp.onrender.com/api/tables/${id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         status: "empty",
         customer: "",
-        food: "",
+        food: ""
       }),
     });
 
     if (!res.ok) throw new Error("Failed to update");
-    await res.json();
-    showToast(`Table ${id} is now empty.`);
-    renderTablesPage();
+    showToast("Table is now empty!");
+    setTimeout(renderTablesPage, 300);
   } catch (err) {
     console.error("❌ Error:", err);
-    showToast("Error updating table.");
+    showToast("Error updating table");
   }
 }
+
 
   // =============================
   // ROLE-BASED BOTTOM TAB BAR
