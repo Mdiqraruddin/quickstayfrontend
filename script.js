@@ -918,7 +918,7 @@ function cancelBooking(bookingId) {
   if (!loggedInUser) return showToast("Please login first.");
   if (!confirm("Are you sure you want to cancel this booking?")) return;
 
-  fetch(`http://localhost:5000/api/bookings/${bookingId}`, {
+  fetch(`https://hotel-backend-ncgp.onrender.com/api/bookings/${bookingId}`, {
     method: "DELETE",
   })
     .then((res) => {
@@ -1251,7 +1251,7 @@ window.hm_openEditExpenditure = openEditExpenditure;
     Array.from(document.querySelectorAll("button[data-remove]")).forEach((b) =>
       b.addEventListener("click", async (ev) => {
         const id = ev.currentTarget.dataset.remove;
-        const res = await fetch(`http://localhost:5000/api/employees/${id}`, {
+        const res = await fetch(`https://hotel-backend-ncgp.onrender.com/api/employees/${id}`, {
           method: "DELETE",
         });
         if (res.ok) {
